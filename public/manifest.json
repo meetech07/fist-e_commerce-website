@@ -1,0 +1,22 @@
+{
+  "name": "Paras Enterprises",
+  "short_name": "Paras Enterprises",
+  "description": "Premium false ceiling materials, PVC & WPC panels, gypsum boards and interior solutions. Pan-India delivery from Nagpur.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f5f0",
+  "theme_color": "#c8a24b",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
