@@ -8,7 +8,7 @@ export const SITE = {
   phone: "+91 88639 82250",
   phoneRaw: "+918863982250",
   whatsapp: "918863982250",
-  email: "sales@diaenterprises.in",
+  email: "meetech07@gmail.com",
   address: {
     line1: "Gali No. 3, Behind Rohtas Petrol Pump",
     line2: "New Dillian, Dehri, Rohtas",
@@ -23,7 +23,7 @@ export const SITE = {
   hours: "Mon – Sun, 09:00 AM – 05:00 PM",
   social: {
     facebook: "https://facebook.com",
-    instagram: "https://instagram.com",
+    instagram: "https://www.instagram.com/manish.singh06?igsh=MTY0anZjN2V2azV5Mg==",
     linkedin: "https://linkedin.com",
     youtube: "https://youtube.com",
     twitter: "https://x.com",

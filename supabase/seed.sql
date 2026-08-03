@@ -43,7 +43,7 @@ insert into public.coupons (code, type, value, min_cart, max_discount, usage_lim
 insert into public.settings (key, value) values
 ('whatsapp', '+919829000000'),
 ('phone', '+91 98290 00000'),
-('email', 'sales@diaenterprises.in'),
+('email', 'meetech07@gmail.com'),
 ('address', 'Shop 12, Interior Market, Ring Road, Nagpur, Maharashtra 440010'),
 ('shipping_threshold', '5000'),
 ('shipping_fee', '150'),

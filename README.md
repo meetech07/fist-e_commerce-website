@@ -212,7 +212,7 @@ To enable auto-deploy, add these repo secrets (Settings → Secrets and variable
 | `VERCEL_ORG_ID` | Run `vercel link` locally, then check `.vercel/project.json` |
 | `VERCEL_PROJECT_ID` | Same `.vercel/project.json` file |
 
-> The deploy job auto-skips (instead of failing) until those secrets exist, so you can push freely without setting them up.
+> Until those secrets are added, the deploy run will fail with a clear "Missing Vercel secrets" message instead of silently skipping — so you'll always know what's going on.
 
 ---
 
@@ -241,7 +241,7 @@ Found a bug or have an idea? Feel free to open an issue or send a PR. Please kee
 
 This website and every part of it — the code, design, branding, images and content — belongs to **DIA Enterprises**. The repo is public so you can look around and learn from it, but it is **not** free to reuse.
 
-If you want to use this project, adapt it for your own business, or build on top of it, **please ask for permission first** — drop a mail to `sales@diaenterprises.in`. Reusing the "DIA Enterprises" name, logo or any of this code without permission is not allowed. Full terms are in the [`LICENSE`](./LICENSE) file.
+If you want to use this project, adapt it for your own business, or build on top of it, **please ask for permission first** — drop a mail to `meetech07@gmail.com`. Reusing the "DIA Enterprises" name, logo or any of this code without permission is not allowed. Full terms are in the [`LICENSE`](./LICENSE) file.
 
 ---
 
@@ -249,7 +249,8 @@ If you want to use this project, adapt it for your own business, or build on top
 
 - Project repo: [github.com/meetech07/fist-e_commerce-website](https://github.com/meetech07/fist-e_commerce-website)
 - Business: **DIA Enterprises** — false ceiling & interior materials
-- Email: `sales@diaenterprises.in`
+- Email: `meetech07@gmail.com`
+- Instagram: [@manish.singh06](https://www.instagram.com/manish.singh06?igsh=MTY0anZjN2V2azV5Mg==)
 
 ---
 
