@@ -151,24 +151,142 @@ There's a ready-made `supabase/schema.sql` + `supabase/seed.sql` in the repo if 
 ## 📁 Project Structure
 
 ```
-├── public/              # static assets, icons, OG images
+.
+├── .github/
+│   └── workflows/
+│       ├── ci.yml                 # lint + type-check + build
+│       └── deploy.yml             # Vercel auto-deploy
+├── public/
+│   ├── icon.png                   # 512×512 app icon
+│   ├── icon-192.png               # 192×192 PWA icon
+│   ├── og-default.png             # social share image
+│   ├── manifest.json              # PWA manifest
+│   └── *.svg                      # default Next assets
 ├── src/
-│   ├── app/             # Next.js App Router pages
-│   │   ├── admin/       #   admin panel
-│   │   ├── account/     #   user dashboard
-│   │   ├── api/         #   route handlers (orders, razorpay, etc.)
-│   │   └── ...          #   blog, cart, checkout, products, legal...
+│   ├── middleware.ts              # auth + role protection
+│   ├── app/                       # App Router routes
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── layout.tsx             # root layout + SEO metadata
+│   │   ├── loading.tsx
+│   │   ├── not-found.tsx
+│   │   ├── page.tsx               # homepage
+│   │   ├── robots.ts
+│   │   ├── sitemap.ts
+│   │   ├── about/                 # about page
+│   │   ├── account/               # user dashboard
+│   │   │   ├── layout.tsx
+│   │   │   ├── addresses/
+│   │   │   ├── invoices/
+│   │   │   │   └── [id]/          # invoice detail
+│   │   │   ├── orders/
+│   │   │   │   └── [id]/          # order detail
+│   │   │   ├── profile/
+│   │   │   ├── recently-viewed/
+│   │   │   └── wishlist/
+│   │   ├── admin/                 # admin panel
+│   │   │   ├── layout.tsx
+│   │   │   ├── cms/
+│   │   │   ├── coupons/
+│   │   │   ├── customers/
+│   │   │   ├── enquiries/
+│   │   │   ├── login/
+│   │   │   ├── orders/
+│   │   │   ├── products/
+│   │   │   │   ├── new/
+│   │   │   │   └── [id]/edit/
+│   │   │   └── settings/
+│   │   ├── api/                   # route handlers
+│   │   │   ├── admin/
+│   │   │   │   ├── enquiries/
+│   │   │   │   └── products/
+│   │   │   ├── contact/
+│   │   │   ├── newsletter/
+│   │   │   ├── orders/
+│   │   │   ├── quote/
+│   │   │   ├── razorpay/
+│   │   │   │   ├── order/
+│   │   │   │   └── verify/
+│   │   │   ├── search/
+│   │   │   └── upload/
+│   │   ├── blog/
+│   │   │   └── [slug]/            # blog post
+│   │   ├── cart/
+│   │   ├── categories/
+│   │   ├── category/[slug]/       # category landing
+│   │   ├── checkout/
+│   │   ├── compare/
+│   │   ├── contact/
+│   │   ├── forgot-password/
+│   │   ├── installation/
+│   │   ├── login/
+│   │   ├── order-confirmed/
+│   │   ├── otp/
+│   │   ├── privacy-policy/
+│   │   ├── products/
+│   │   │   └── [slug]/            # product detail
+│   │   ├── quote/
+│   │   ├── refund-policy/
+│   │   ├── search/
+│   │   ├── signup/
+│   │   └── terms/
 │   ├── components/
-│   │   ├── ui/          #   reusable UI primitives
-│   │   ├── home/        #   homepage sections + 3D hero
-│   │   ├── admin/       #   admin panel components
-│   │   ├── products/    #   product cards, filters, gallery
-│   │   └── ...
-│   ├── hooks/           # custom React hooks
-│   ├── lib/             # supabase clients, store, mock data
-│   ├── types/           # shared TypeScript types
-│   └── middleware.ts    # auth + role protection
-├── supabase/            # schema.sql + seed.sql
+│   │   ├── account/               # AccountShell, StatusBadge
+│   │   ├── admin/                 # AdminShell, ProductForm
+│   │   ├── auth/                  # AuthFlow
+│   │   ├── cart/                  # CartPageClient
+│   │   ├── checkout/              # CheckoutFlow
+│   │   ├── home/                  # homepage sections + 3D hero
+│   │   │   └── three/             # HeroCanvas (WebGL)
+│   │   ├── layout/                # Navbar, Footer, CartDrawer…
+│   │   ├── products/              # ProductCard, ProductDetail…
+│   │   ├── seo/                   # JsonLd
+│   │   ├── shared/                # Reveal, Rating, SectionHeading…
+│   │   └── ui/                    # shadcn-style primitives
+│   │       └── accordion, avatar, badge, button, card, checkbox,
+│   │           dialog, input, label, select, separator, sheet,
+│   │           skeleton, slider, switch, tabs, textarea, tooltip
+│   ├── hooks/                     # useHooks.ts
+│   ├── lib/
+│   │   ├── admin-api.ts
+│   │   ├── admin-store.tsx
+│   │   ├── auth-local.ts          # demo-mode auth
+│   │   ├── business-config.ts
+│   │   ├── business-store.tsx
+│   │   ├── constants.ts           # SITE config, nav, testimonials…
+│   │   ├── data.ts
+│   │   ├── enquiries-local.ts
+│   │   ├── orders-local.ts        # demo-mode orders
+│   │   ├── prices.ts
+│   │   ├── razorpay.ts
+│   │   ├── seo.ts
+│   │   ├── utils.ts
+│   │   ├── data/
+│   │   │   └── mock-data.ts       # offline demo products
+│   │   ├── hooks/
+│   │   │   └── useOrders.ts
+│   │   ├── store/
+│   │   │   └── store.tsx          # global cart/compare state
+│   │   └── supabase/
+│   │       ├── admin.ts           # service-role client
+│   │       ├── client.ts          # browser client
+│   │       ├── server.ts          # SSR client
+│   │       └── staff.ts
+│   └── types/
+│       └── index.ts               # shared types
+├── supabase/
+│   ├── schema.sql
+│   └── seed.sql
+├── .env.example
+├── .gitignore
+├── LICENSE
+├── README.md
+├── eslint.config.mjs
+├── next.config.ts
+├── package.json
+├── package-lock.json
+├── postcss.config.mjs
+├── tsconfig.json
 └── vercel.json
 ```
 
