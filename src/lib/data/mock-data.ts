@@ -55,7 +55,7 @@ function makeProduct(data: Partial<Product> & { name: string; price: number; cat
     id: data.id ?? pid(),
     slug,
     name: data.name,
-    description: data.description ?? `${data.name} — premium quality, engineered for durability, available at Paras Enterprises.`,
+    description: data.description ?? `${data.name} — premium quality, engineered for durability, available at DIA Enterprises.`,
     short_description: data.short_description,
     price: data.price,
     mrp,
@@ -63,8 +63,8 @@ function makeProduct(data: Partial<Product> & { name: string; price: number; cat
     discount,
     category_id: data.category_id,
     category_name: cat?.name,
-    brand_id: data.brand_id ?? "brand-paras",
-    brand_name: data.brand_name ?? "Paras Premium",
+    brand_id: data.brand_id ?? "brand-dia",
+    brand_name: data.brand_name ?? "DIA Premium",
     sku: data.sku ?? `PE-${Math.random().toString(36).slice(2, 8).toUpperCase()}`,
     stock_quantity: data.stock_quantity ?? 250,
     unit: data.unit ?? "per sq. ft.",
@@ -345,7 +345,7 @@ export const mockProducts: Product[] = [
 ];
 
 export const mockTestimonials: Testimonial[] = [
-  { id: "t1", name: "Rajesh Khanna", role: "Interior Designer", company: "Studio RK Interiors", rating: 5, content: "Paras Enterprises has been our go-to supplier for false ceiling & WPC panels for 6 years. Unmatched quality, honest pricing and same-week delivery every single time.", featured: true, created_at: daysAgo(20) },
+  { id: "t1", name: "Rajesh Khanna", role: "Interior Designer", company: "Studio RK Interiors", rating: 5, content: "DIA Enterprises has been our go-to supplier for false ceiling & WPC panels for 6 years. Unmatched quality, honest pricing and same-week delivery every single time.", featured: true, created_at: daysAgo(20) },
   { id: "t2", name: "Priya Sharma", role: "Homeowner", company: "Wadala, Mumbai", rating: 5, content: "Got my entire living room done with their designer PVC ceilings. The material finish is premium and their installation team was spotless. Highly recommended!", featured: true, created_at: daysAgo(35) },
   { id: "t3", name: "Amit Verma", role: "Contractor", company: "Verma Constructions", rating: 5, content: "Bulk gypsum, channels and accessories at trade prices with proper GST invoices. Their B2B portal makes reordering effortless. A true business partner.", featured: true, created_at: daysAgo(48) },
   { id: "t4", name: "Neha Gupta", role: "Architect", company: "NG Designs", rating: 5, content: "The 3D wall panel range is stunning and priced far better than market. My clients love the finished spaces. Excellent technical support.", featured: true, created_at: daysAgo(60) },
@@ -357,25 +357,25 @@ export const mockBlogs: BlogPost[] = [
     id: "b1", slug: "pvc-vs-gypsum-false-ceiling", title: "PVC vs Gypsum False Ceiling: Which is Right for You?",
     excerpt: "A complete comparison of cost, durability, looks and maintenance between PVC and gypsum false ceilings for Indian homes.",
     content: `Choosing between PVC and gypsum false ceilings is one of the most common dilemmas...`,
-    cover_image: IMG.ceiling2, category: "Buying Guide", tags: ["false ceiling", "pvc", "gypsum"], author: "Paras Enterprises", reading_time: 6, is_published: true, views: 4200, created_at: daysAgo(15),
+    cover_image: IMG.ceiling2, category: "Buying Guide", tags: ["false ceiling", "pvc", "gypsum"], author: "DIA Enterprises", reading_time: 6, is_published: true, views: 4200, created_at: daysAgo(15),
   },
   {
     id: "b2", slug: "wpc-wall-panels-transformation", title: "How WPC Wall Panels Transform Your Interiors",
     excerpt: "Waterproof, termite-proof and stunning — here's why WPC wall panels are the future of Indian interior design.",
     content: `WPC panels are revolutionising Indian interiors...`,
-    cover_image: IMG.wall1, category: "Interior Ideas", tags: ["wpc", "wall panels"], author: "Paras Enterprises", reading_time: 5, is_published: true, views: 3100, created_at: daysAgo(28),
+    cover_image: IMG.wall1, category: "Interior Ideas", tags: ["wpc", "wall panels"], author: "DIA Enterprises", reading_time: 5, is_published: true, views: 3100, created_at: daysAgo(28),
   },
   {
     id: "b3", slug: "false-ceiling-lighting-ideas", title: "10 False Ceiling Lighting Ideas for a Luxury Look",
     excerpt: "From cove lighting to spotlights — elevate your home with these premium false ceiling lighting designs.",
     content: `Lighting can make or break a false ceiling design...`,
-    cover_image: IMG.room6, category: "Design Tips", tags: ["lighting", "false ceiling", "design"], author: "Paras Enterprises", reading_time: 7, is_published: true, views: 5200, created_at: daysAgo(42),
+    cover_image: IMG.room6, category: "Design Tips", tags: ["lighting", "false ceiling", "design"], author: "DIA Enterprises", reading_time: 7, is_published: true, views: 5200, created_at: daysAgo(42),
   },
   {
     id: "b4", slug: "cost-estimate-false-ceiling", title: "False Ceiling Cost in India 2026: Complete Estimate",
     excerpt: "Per square foot rates for PVC, gypsum and POP ceilings, plus labour costs and hidden charges you must know.",
     content: `Understanding false ceiling costs...`,
-    cover_image: IMG.ceiling1, category: "Buying Guide", tags: ["cost", "estimate", "false ceiling"], author: "Paras Enterprises", reading_time: 8, is_published: true, views: 6400, created_at: daysAgo(55),
+    cover_image: IMG.ceiling1, category: "Buying Guide", tags: ["cost", "estimate", "false ceiling"], author: "DIA Enterprises", reading_time: 8, is_published: true, views: 6400, created_at: daysAgo(55),
   },
 ];
 

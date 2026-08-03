@@ -10,7 +10,7 @@ import { StaggerGroup, MotionItem } from "@/components/shared/Reveal";
 
 export const metadata: Metadata = buildMetadata({
   title: "All Categories",
-  description: "Explore all product categories at Paras Enterprises — false ceiling, PVC panels, WPC panels, gypsum, channels, louvers and more.",
+  description: "Explore all product categories at DIA Enterprises — false ceiling, PVC panels, WPC panels, gypsum, channels, louvers and more.",
   path: "/categories",
 });
 

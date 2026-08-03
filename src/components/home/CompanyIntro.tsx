@@ -69,7 +69,7 @@ export function CompanyIntro() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-5 leading-relaxed text-muted-foreground">
-              Paras Enterprises is a premium supplier of false ceiling materials, PVC ceiling panels, WPC wall panels,
+              DIA Enterprises is a premium supplier of false ceiling materials, PVC ceiling panels, WPC wall panels,
               gypsum boards, ceiling channels, louvers and complete interior decorative hardware. From luxury homes to
               large commercial projects, we supply materials that combine aesthetics, durability and honest pricing.
             </p>

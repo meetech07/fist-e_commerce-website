@@ -210,7 +210,7 @@ export function AuthFlow({ mode = "login" }: { mode?: "login" | "signup" }) {
 
             {!configured && (
               <p className="mt-4 rounded-xl bg-warning/10 px-3 py-2 text-center text-[11px] text-warning">
-                Demo mode: use <span className="font-bold">admin@parasenterprises.in / Admin@123</span> for the admin panel,
+                Demo mode: use <span className="font-bold">admin@diaenterprises.in / Admin@123</span> for the admin panel,
                 or sign up for a customer account.
               </p>
             )}

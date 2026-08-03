@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 export const metadata: Metadata = buildMetadata({
   title: "Ceiling & Interior Blog",
   description:
-    "Expert guides on false ceilings, PVC & WPC wall panels, gypsum boards, installation tips and interior design inspiration from Paras Enterprises.",
+    "Expert guides on false ceilings, PVC & WPC wall panels, gypsum boards, installation tips and interior design inspiration from DIA Enterprises.",
   path: "/blog",
 });
 
@@ -20,7 +20,7 @@ export default async function BlogPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 pb-24 pt-28 sm:px-6">
       <div className="max-w-2xl">
-        <h1 className="font-display text-4xl font-semibold sm:text-5xl">The Paras Journal</h1>
+        <h1 className="font-display text-4xl font-semibold sm:text-5xl">The DIA Journal</h1>
         <p className="mt-4 text-lg text-muted-foreground">
           Guides, tips and inspiration for ceilings, walls and modern interiors — straight from our workshop floor.
         </p>

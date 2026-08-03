@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     "3D wall panels",
     "interior decorative materials",
     "ceiling hardware",
-    "Paras Enterprises",
+    "DIA Enterprises",
     "false ceiling price India",
   ],
   applicationName: SITE.name,

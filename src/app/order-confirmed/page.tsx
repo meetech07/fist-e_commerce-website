@@ -4,8 +4,8 @@ import { CheckCircle2, Package, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "Order Confirmed | Paras Enterprises",
-  description: "Your order has been placed successfully. Thank you for shopping with Paras Enterprises.",
+  title: "Order Confirmed | DIA Enterprises",
+  description: "Your order has been placed successfully. Thank you for shopping with DIA Enterprises.",
   robots: { index: false },
 };
 

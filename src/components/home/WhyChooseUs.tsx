@@ -57,7 +57,7 @@ export function WhyChooseUs() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeading
           eyebrow="Why Choose Us"
-          title="The Paras Enterprises difference"
+          title="The DIA Enterprises difference"
           description="Why architects, builders and homeowners trust us with their most important spaces."
         />
         <StaggerGroup className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

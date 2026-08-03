@@ -17,7 +17,7 @@ import { getNewArrivals, getBestSellers, getTestimonials } from "@/lib/data";
 export const metadata = {
   title: "Home",
   description:
-    "Paras Enterprises — India's premium supplier of false ceiling materials, PVC ceiling panels, WPC wall panels, gypsum boards, ceiling channels, louvers and interior hardware. Shop online with pan-India delivery.",
+    "DIA Enterprises — India's premium supplier of false ceiling materials, PVC ceiling panels, WPC wall panels, gypsum boards, ceiling channels, louvers and interior hardware. Shop online with pan-India delivery.",
 };
 
 export default async function HomePage() {

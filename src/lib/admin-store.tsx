@@ -20,7 +20,7 @@ const KEYS = {
 
 function seedCustomers(): Profile[] {
   return [
-    { id: "local-admin", name: "Admin", email: "admin@parasenterprises.in", phone: "", role: "admin", company: "Paras Enterprises", gstin: "", created_at: new Date().toISOString() },
+    { id: "local-admin", name: "Admin", email: "admin@diaenterprises.in", phone: "", role: "admin", company: "DIA Enterprises", gstin: "", created_at: new Date().toISOString() },
     { id: "demo-c1", name: "Rohit Sharma", email: "rohit@buildmart.in", phone: "9823001122", role: "customer", company: "BuildMart Interiors", gstin: "27ABCDE1234F1Z5", created_at: new Date().toISOString() },
     { id: "demo-c2", name: "Priya Deshmukh", email: "priya.d@designhub.in", phone: "9765012345", role: "customer", company: "DesignHub Studio", gstin: "", created_at: new Date().toISOString() },
     { id: "demo-c3", name: "Amit Khare", email: "amit.khare@gmail.com", phone: "9881122334", role: "customer", company: "", gstin: "", created_at: new Date().toISOString() },

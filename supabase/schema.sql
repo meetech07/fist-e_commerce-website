@@ -1,5 +1,5 @@
 -- ============================================================
--- PARAS ENTERPRISES — Supabase Database Schema
+-- DIA ENTERPRISES — Supabase Database Schema
 -- Run this in the Supabase SQL Editor
 -- ============================================================
 
@@ -252,7 +252,7 @@ create table if not exists public.blogs (
   cover_image text,
   category text,
   tags text[] not null default '{}',
-  author text not null default 'Paras Enterprises',
+  author text not null default 'DIA Enterprises',
   author_image text,
   reading_time integer not null default 4,
   is_published boolean not null default true,

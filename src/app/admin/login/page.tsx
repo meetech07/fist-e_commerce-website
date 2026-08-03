@@ -79,7 +79,7 @@ export default function AdminLoginPage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-1.5">
             <Label htmlFor="admin-email">Staff Email</Label>
-            <Input id="admin-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="admin@parasenterprises.in" autoComplete="email" />
+            <Input id="admin-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="admin@diaenterprises.in" autoComplete="email" />
           </div>
           <div className="space-y-1.5">
             <Label htmlFor="admin-password">Password</Label>
@@ -92,7 +92,7 @@ export default function AdminLoginPage() {
 
         {!configured && (
           <p className="mt-4 rounded-xl bg-warning/10 px-3 py-2 text-center text-[11px] text-warning">
-            Demo mode: use <span className="font-bold">admin@parasenterprises.in / Admin@123</span>
+            Demo mode: use <span className="font-bold">admin@diaenterprises.in / Admin@123</span>
           </p>
         )}
       </div>

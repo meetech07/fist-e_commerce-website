@@ -12,7 +12,7 @@ import { Reveal } from "@/components/shared/Reveal";
 export const metadata: Metadata = buildMetadata({
   title: "Installation Services",
   description:
-    "Professional false ceiling, PVC & WPC panel installation by Paras Enterprises. Free site visits, certified installers and a workmanship guarantee in Nagpur.",
+    "Professional false ceiling, PVC & WPC panel installation by DIA Enterprises. Free site visits, certified installers and a workmanship guarantee in Nagpur.",
   path: "/installation",
 });
 

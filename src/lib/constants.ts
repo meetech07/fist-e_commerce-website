@@ -1,14 +1,14 @@
 export const SITE = {
-  name: "Paras Enterprises",
-  legalName: "Paras Enterprises",
+  name: "DIA Enterprises",
+  legalName: "DIA Enterprises",
   tagline: "False Ceiling & PVC Material Supplier",
   description:
-    "Paras Enterprises — trusted supplier of false ceiling materials, PVC ceiling panels, WPC wall panels, gypsum boards, ceiling channels, louvers and interior decorative hardware. B2B & B2C, serving Dehri, Rohtas (Bihar) and pan-India.",
-  url: "https://parasenterprises.in",
+    "DIA Enterprises — trusted supplier of false ceiling materials, PVC ceiling panels, WPC wall panels, gypsum boards, ceiling channels, louvers and interior decorative hardware. B2B & B2C, serving Dehri, Rohtas (Bihar) and pan-India.",
+  url: "https://diaenterprises.in",
   phone: "+91 88639 82250",
   phoneRaw: "+918863982250",
   whatsapp: "918863982250",
-  email: "sales@parasenterprises.in",
+  email: "sales@diaenterprises.in",
   address: {
     line1: "Gali No. 3, Behind Rohtas Petrol Pump",
     line2: "New Dillian, Dehri, Rohtas",
@@ -31,7 +31,7 @@ export const SITE = {
   },
 } as const;
 
-export const WHATSAPP_MESSAGE = "Hello Paras Enterprises! I want to enquire about your ceiling & interior products.";
+export const WHATSAPP_MESSAGE = "Hello DIA Enterprises! I want to enquire about your ceiling & interior products.";
 
 export const categoriesData: Array<{
   slug: string;
@@ -158,7 +158,7 @@ export const TESTIMONIALS = [
     role: "Interior Designer",
     company: "Studio RK Interiors",
     content:
-      "Paras Enterprises has been our go-to supplier for false ceiling & WPC panels for 6 years. Unmatched quality, honest pricing and same-week delivery every single time.",
+      "DIA Enterprises has been our go-to supplier for false ceiling & WPC panels for 6 years. Unmatched quality, honest pricing and same-week delivery every single time.",
     rating: 5,
   },
   {

@@ -45,7 +45,7 @@ export function buildMetadata({
       "PVC louvers",
       "interior decorative materials",
       "ceiling hardware",
-      "Paras Enterprises",
+      "DIA Enterprises",
     ],
   };
 }
@@ -57,7 +57,7 @@ export function productJsonLd(product: Product) {
     name: product.name,
     sku: product.sku,
     description: product.description,
-    brand: { "@type": "Brand", name: product.brand_name ?? "Paras Enterprises" },
+    brand: { "@type": "Brand", name: product.brand_name ?? "DIA Enterprises" },
     image: product.images,
     offers: {
       "@type": "Offer",

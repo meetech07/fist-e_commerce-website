@@ -1,5 +1,5 @@
 -- ============================================================
--- PARAS ENTERPRISES — Seed Data
+-- DIA ENTERPRISES — Seed Data
 -- Run AFTER schema.sql
 -- ============================================================
 
@@ -21,7 +21,7 @@ insert into public.categories (slug, name, description, image, icon, featured, s
 
 -- Brands
 insert into public.brands (name, slug, featured, sort_order) values
-('Paras Premium', 'paras-premium', true, 1),
+('DIA Premium', 'dia-premium', true, 1),
 ('Color Plus', 'color-plus', true, 2),
 ('Gravia', 'gravia', true, 3),
 ('Gipla', 'gipla', true, 4),
@@ -43,7 +43,7 @@ insert into public.coupons (code, type, value, min_cart, max_discount, usage_lim
 insert into public.settings (key, value) values
 ('whatsapp', '+919829000000'),
 ('phone', '+91 98290 00000'),
-('email', 'sales@parasenterprises.in'),
+('email', 'sales@diaenterprises.in'),
 ('address', 'Shop 12, Interior Market, Ring Road, Nagpur, Maharashtra 440010'),
 ('shipping_threshold', '5000'),
 ('shipping_fee', '150'),
@@ -52,7 +52,7 @@ insert into public.settings (key, value) values
 
 -- Testimonials
 insert into public.testimonials (name, role, company, rating, content, featured) values
-('Rajesh Khanna', 'Interior Designer', 'Studio RK Interiors', 5, 'Paras Enterprises has been our go-to supplier for false ceiling & WPC panels for 6 years. Unmatched quality, honest pricing and same-week delivery every single time.', true),
+('Rajesh Khanna', 'Interior Designer', 'Studio RK Interiors', 5, 'DIA Enterprises has been our go-to supplier for false ceiling & WPC panels for 6 years. Unmatched quality, honest pricing and same-week delivery every single time.', true),
 ('Priya Sharma', 'Homeowner', 'Wadala, Mumbai', 5, 'Got my entire living room done with their designer PVC ceilings. The material finish is premium and their installation team was spotless.', true),
 ('Amit Verma', 'Contractor', 'Verma Constructions', 5, 'Bulk gypsum, channels and accessories at trade prices with proper GST invoices. Their B2B portal makes reordering effortless.', true),
 ('Neha Gupta', 'Architect', 'NG Designs', 5, 'The 3D wall panel range is stunning and priced far better than market. Excellent technical support from the team.', true),
@@ -71,7 +71,7 @@ insert into public.faqs (question, answer, category, sort_order) values
 insert into auth.users (id, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at)
 values (
   uuid_generate_v4(),
-  'admin@parasenterprises.in',
+  'admin@diaenterprises.in',
   crypt('Admin@123', gen_salt('bf')),
   now(),
   '{"provider":"email","providers":["email"]}',

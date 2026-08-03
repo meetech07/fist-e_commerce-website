@@ -4,7 +4,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "Login",
-  description: "Login to your Paras Enterprises account to track orders, download invoices and manage your profile.",
+  description: "Login to your DIA Enterprises account to track orders, download invoices and manage your profile.",
   path: "/login",
 });
 

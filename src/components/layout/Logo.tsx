@@ -8,7 +8,7 @@ import { useBusinessSettings } from "@/lib/business-store";
 export function Logo({ className, compact = false }: { className?: string; compact?: boolean }) {
   const { settings } = useBusinessSettings();
   const parts = settings.companyName.trim().split(/\s+/);
-  const first = parts[0] ?? "Paras";
+  const first = parts[0] ?? "DIA";
   const rest = parts.slice(1).join(" ");
 
   return (

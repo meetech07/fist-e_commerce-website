@@ -89,7 +89,7 @@ export function ProductCard({ product, className, priority }: { product: Product
           <div className="flex flex-1 flex-col gap-1.5 p-4">
             <div className="flex items-center justify-between gap-2">
               <span className="text-[11px] font-semibold uppercase tracking-wider text-accent">
-                {product.brand_name ?? "Paras Premium"}
+                {product.brand_name ?? "DIA Premium"}
               </span>
               {product.category_name && (
                 <span className="text-[11px] text-muted-foreground">{product.category_name}</span>

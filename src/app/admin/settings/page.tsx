@@ -361,7 +361,7 @@ export default function AdminBusinessSettings() {
               <Field label="Copyright Text">
                 <Input value={f.footerCopyright} onChange={(e) => set("footerCopyright", e.target.value)} />
               </Field>
-              <p className="mt-1.5 text-xs text-muted-foreground">Use {"{year}"} to auto-insert the current year, e.g. © {"{year}"} Paras Enterprises.</p>
+              <p className="mt-1.5 text-xs text-muted-foreground">Use {"{year}"} to auto-insert the current year, e.g. © {"{year}"} DIA Enterprises.</p>
             </div>
           </Section>
 

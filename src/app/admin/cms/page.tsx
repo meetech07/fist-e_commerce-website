@@ -246,7 +246,7 @@ function BlogManager() {
 
 function BlogDialog({ open, onOpenChange, item, onSave }: { open: boolean; onOpenChange: (v: boolean) => void; item: BlogPost | null; onSave: (b: BlogPost) => void }) {
   const [f, setF] = React.useState<BlogPost>({ id: "", slug: "", title: "", excerpt: "", content: "", cover_image: "", category: "", tags: [], author: "", reading_time: 3, is_published: true, views: 0, created_at: "" });
-  const emptyBlog = (): BlogPost => ({ id: "", slug: "", title: "", excerpt: "", content: "", cover_image: "", category: "", tags: [], author: "Paras Enterprises", reading_time: 3, is_published: true, views: 0, created_at: new Date().toISOString() });
+  const emptyBlog = (): BlogPost => ({ id: "", slug: "", title: "", excerpt: "", content: "", cover_image: "", category: "", tags: [], author: "DIA Enterprises", reading_time: 3, is_published: true, views: 0, created_at: new Date().toISOString() });
   React.useEffect(() => {
     if (open) setF(item ?? emptyBlog());
   }, [open, item]);

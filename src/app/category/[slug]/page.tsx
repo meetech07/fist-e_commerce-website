@@ -17,7 +17,7 @@ export async function generateMetadata({
   if (!category) return buildMetadata({ title: "Category not found", path: `/category/${slug}` });
   return buildMetadata({
     title: category.name,
-    description: category.description ?? `${category.name} from Paras Enterprises — premium quality at trade prices.`,
+    description: category.description ?? `${category.name} from DIA Enterprises — premium quality at trade prices.`,
     path: `/category/${slug}`,
     image: category.image,
   });

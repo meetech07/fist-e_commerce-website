@@ -95,7 +95,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
         <ShieldCheck className="h-12 w-12 text-destructive" />
         <h1 className="mt-4 font-display text-2xl font-semibold">Access Restricted</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          This area is reserved for Paras Enterprises staff. If you&apos;re a customer, head back to your account.
+          This area is reserved for DIA Enterprises staff. If you&apos;re a customer, head back to your account.
         </p>
         <Link href="/account" className={cn(buttonVariants(), "mt-6")}>Go to Account</Link>
         <Link href="/admin/login" className="mt-3 text-xs font-medium text-muted-foreground transition hover:text-accent">

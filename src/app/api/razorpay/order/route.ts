@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
       amount,
       currency,
       receipt: `pe_${Date.now()}`,
-      notes: { merchant: "Paras Enterprises" },
+      notes: { merchant: "DIA Enterprises" },
     });
 
     return NextResponse.json(order);

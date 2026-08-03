@@ -4,7 +4,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "Create Account",
-  description: "Create a free account with Paras Enterprises for faster checkout, order tracking and trade pricing.",
+  description: "Create a free account with DIA Enterprises for faster checkout, order tracking and trade pricing.",
   path: "/signup",
 });
 

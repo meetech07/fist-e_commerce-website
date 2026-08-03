@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="public/icon.png" alt="Paras Enterprises logo" width="90" />
+  <img src="public/icon.png" alt="DIA Enterprises logo" width="90" />
 </p>
 
-<h1 align="center">🪜 Paras Enterprises</h1>
+<h1 align="center">🪜 DIA Enterprises</h1>
 
 <p align="center">
   <b>False Ceiling & Interior Materials Store</b> — a full B2B + B2C e-commerce platform for PVC/WPC panels, gypsum boards, ceiling channels, louvers, wall mouldings and everything in between.
@@ -16,6 +16,7 @@
   <img src="https://img.shields.io/badge/Supabase-3fcf8e?logo=supabase&logoColor=white" />
   <img src="https://img.shields.io/badge/Razorpay-0C2451?logo=razorpay&logoColor=white" />
   <img src="https://img.shields.io/badge/Three.js-000000?logo=threedotjs&logoColor=white" />
+  <img src="https://img.shields.io/github/actions/workflow/status/meetech07/fist-e_commerce-website/ci.yml?branch=main&label=CI" />
   <img src="https://img.shields.io/badge/deployed%20on-Vercel-000000?logo=vercel&logoColor=white" />
 </p>
 
@@ -23,7 +24,7 @@
 
 ## What is this?
 
-Paras Enterprises is an online storefront I built for a false ceiling & interior materials business. It started as a pretty simple "just put the products on the web" idea and slowly grew into a full platform — product catalog, real payments, GST invoices, an admin panel, the whole deal.
+DIA Enterprises is an online storefront I built for a false ceiling & interior materials business. It started as a pretty simple "just put the products on the web" idea and slowly grew into a full platform — product catalog, real payments, GST invoices, an admin panel, the whole deal.
 
 It supports both retail customers (B2C) and contractors/dealers (B2B). Dealers can grab a GST invoice, apply coupons, get bulk pricing, request a custom quote and even book installation services.
 
@@ -124,7 +125,7 @@ Use these to try the admin panel and checkout in demo mode:
 
 | Type | Value |
 | --- | --- |
-| Admin login | `admin@parasenterprises.in` / `Admin@123` |
+| Admin login | `admin@diaenterprises.in` / `Admin@123` |
 | Coupons | `WELCOME10`, `SAVE500`, `CEILING15` |
 | Free shipping | orders above ₹5,000 |
 
@@ -185,9 +186,9 @@ npx tsc --noEmit   # type-check only
 
 ---
 
-## ☁️ Deployment
+## ☁️ Deployment & CI/CD
 
-Deploy on Vercel as a standard Next.js app — `vercel.json` is already included.
+**Manual deploy** — Vercel as a standard Next.js app, `vercel.json` is already included:
 
 ```bash
 npm i -g vercel
@@ -195,6 +196,23 @@ vercel
 ```
 
 Just add the environment variables from above in your project settings and you're live.
+
+**GitHub Actions** — the repo ships with two workflows in `.github/workflows/`:
+
+| Workflow | File | What it does |
+| --- | --- | --- |
+| CI | `ci.yml` | Runs ESLint, type-check and a full production build on every push / PR to `main` |
+| Deploy | `deploy.yml` | Auto-deploys to Vercel production on every push to `main` |
+
+To enable auto-deploy, add these repo secrets (Settings → Secrets and variables → Actions):
+
+| Secret | Where to find it |
+| --- | --- |
+| `VERCEL_TOKEN` | Vercel → Settings → Tokens (create a new token) |
+| `VERCEL_ORG_ID` | Run `vercel link` locally, then check `.vercel/project.json` |
+| `VERCEL_PROJECT_ID` | Same `.vercel/project.json` file |
+
+> The deploy job auto-skips (instead of failing) until those secrets exist, so you can push freely without setting them up.
 
 ---
 
@@ -220,10 +238,10 @@ It's a personal project, but if you spot a bug or have an idea, feel free to ope
 ## 📬 Contact
 
 - Project repo: [github.com/meetech07/fist-e_commerce-website](https://github.com/meetech07/fist-e_commerce-website)
-- Business: **Paras Enterprises** — false ceiling & interior materials
+- Business: **DIA Enterprises** — false ceiling & interior materials
 
 ---
 
 <p align="center">
-  Built with ☕ and Next.js · © Paras Enterprises
+  Built with ☕ and Next.js · © DIA Enterprises
 </p>

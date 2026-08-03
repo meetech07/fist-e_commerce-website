@@ -8,7 +8,7 @@ import { MapSection } from "@/components/home/MapSection";
 import { getTestimonials } from "@/lib/data";
 
 export const metadata: Metadata = buildMetadata({
-  title: "About Paras Enterprises",
+  title: "About DIA Enterprises",
   description:
     "Nagpur's trusted supplier of false ceiling materials, PVC ceiling panels, WPC wall panels and interior solutions since 2012. Direct from manufacturers, delivered pan-India.",
   path: "/about",
@@ -46,7 +46,7 @@ export default async function AboutPage() {
             Crafting spaces with <span className="gold-text">material excellence</span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-            Paras Enterprises is a premium supplier of false ceiling materials, PVC & WPC panels, gypsum boards and
+            DIA Enterprises is a premium supplier of false ceiling materials, PVC & WPC panels, gypsum boards and
             complete interior solutions — trusted by architects, builders, contractors and homeowners across India.
           </p>
         </div>

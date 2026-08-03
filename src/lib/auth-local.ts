@@ -19,10 +19,10 @@ function loadUsers(): Record<string, LocalUser> {
     /* ignore */
   }
   const users: Record<string, LocalUser> = {
-    "admin@parasenterprises.in": {
+    "admin@diaenterprises.in": {
       id: "local-admin",
       name: "Admin",
-      email: "admin@parasenterprises.in",
+      email: "admin@diaenterprises.in",
       role: "admin",
     },
   };
@@ -41,7 +41,7 @@ export function isSupabaseConfigured(): boolean {
 export function localSignIn(email: string, password: string): LocalUser | { error: string } {
   const users = loadUsers();
   const user = users[email.toLowerCase()];
-  if (email.toLowerCase() === "admin@parasenterprises.in" && password === "Admin@123") {
+  if (email.toLowerCase() === "admin@diaenterprises.in" && password === "Admin@123") {
     localStorage.setItem(SESSION_KEY, JSON.stringify(user));
     return user;
   }

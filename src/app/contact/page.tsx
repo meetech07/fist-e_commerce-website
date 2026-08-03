@@ -7,7 +7,7 @@ import { QuoteSection } from "@/components/home/QuoteSection";
 export const metadata: Metadata = buildMetadata({
   title: "Contact Us",
   description:
-    "Reach Paras Enterprises for false ceiling materials, PVC & WPC panels, quotations, samples and installation services. Call, WhatsApp, email or visit our Nagpur showroom.",
+    "Reach DIA Enterprises for false ceiling materials, PVC & WPC panels, quotations, samples and installation services. Call, WhatsApp, email or visit our Nagpur showroom.",
   path: "/contact",
 });
 
