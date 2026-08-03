@@ -231,7 +231,17 @@ Things on my list:
 
 ## 🙌 Contributing
 
-It's a personal project, but if you spot a bug or have an idea, feel free to open an issue or send a PR. Please keep the code style consistent (Prettier + ESLint are set up).
+Found a bug or have an idea? Feel free to open an issue or send a PR. Please keep the code style consistent (Prettier + ESLint are set up). Note: any contribution you send is subject to the license below.
+
+---
+
+## © License & Copyright
+
+**Copyright © 2026 DIA Enterprises. All rights reserved.**
+
+This website and every part of it — the code, design, branding, images and content — belongs to **DIA Enterprises**. The repo is public so you can look around and learn from it, but it is **not** free to reuse.
+
+If you want to use this project, adapt it for your own business, or build on top of it, **please ask for permission first** — drop a mail to `sales@diaenterprises.in`. Reusing the "DIA Enterprises" name, logo or any of this code without permission is not allowed. Full terms are in the [`LICENSE`](./LICENSE) file.
 
 ---
 
@@ -239,9 +249,10 @@ It's a personal project, but if you spot a bug or have an idea, feel free to ope
 
 - Project repo: [github.com/meetech07/fist-e_commerce-website](https://github.com/meetech07/fist-e_commerce-website)
 - Business: **DIA Enterprises** — false ceiling & interior materials
+- Email: `sales@diaenterprises.in`
 
 ---
 
 <p align="center">
-  Built with ☕ and Next.js · © DIA Enterprises
+  Built with ☕ and Next.js · © 2026 DIA Enterprises · All rights reserved
 </p>
