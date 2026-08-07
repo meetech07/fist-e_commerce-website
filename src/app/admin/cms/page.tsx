@@ -2,10 +2,10 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { Pencil, Plus, Trash2 } from "lucide-react";
+import { ImagePlus, Loader2, Pencil, Plus, Trash2 } from "lucide-react";
 import { useAdminStore } from "@/lib/admin-store";
-import type { BlogPost, Faq, GalleryItem, Testimonial } from "@/types";
-import { formatDate, uid } from "@/lib/utils";
+import type { Faq, GalleryItem, Testimonial } from "@/types";
+import { uid } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -22,15 +22,13 @@ export default function AdminCms() {
       <Tabs value={tab} onValueChange={setTab}>
         <TabsList>
           <TabsTrigger value="testimonials">Testimonials</TabsTrigger>
-          <TabsTrigger value="gallery">Gallery</TabsTrigger>
+          <TabsTrigger value="images">Images</TabsTrigger>
           <TabsTrigger value="faqs">FAQs</TabsTrigger>
-          <TabsTrigger value="blogs">Blog Posts</TabsTrigger>
         </TabsList>
 
         <TabsContent value="testimonials"><TestimonialManager /></TabsContent>
-        <TabsContent value="gallery"><GalleryManager /></TabsContent>
+        <TabsContent value="images"><ImageManager /></TabsContent>
         <TabsContent value="faqs"><FaqManager /></TabsContent>
-        <TabsContent value="blogs"><BlogManager /></TabsContent>
       </Tabs>
     </div>
   );
@@ -102,72 +100,75 @@ function TestimonialDialog({ open, onOpenChange, item, onSave }: { open: boolean
   );
 }
 
-/* ---------------- Gallery ---------------- */
+/* ---------------- Images ---------------- */
 
-function GalleryManager() {
+function ImageManager() {
   const { gallery, setCollection } = useAdminStore();
-  const [open, setOpen] = React.useState(false);
-  const [editing, setEditing] = React.useState<GalleryItem | null>(null);
+  const [uploading, setUploading] = React.useState(false);
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
-  const save = (g: GalleryItem) => {
-    const exists = gallery.some((x) => x.id === g.id);
-    setCollection("gallery", exists ? gallery.map((x) => (x.id === g.id ? g : x)) : [...gallery, g]);
-    setOpen(false);
-    setEditing(null);
-    toast.success("Gallery item saved");
+  const addImage = async (files: FileList | null) => {
+    if (!files?.length) return;
+    const file = files[0];
+    if (!file.type.startsWith("image/")) return toast.error("Please choose an image file");
+    if (file.size > 8 * 1024 * 1024) return toast.error("Image must be under 8MB");
+
+    setUploading(true);
+    try {
+      const body = new FormData();
+      body.append("file", file);
+      const res = await fetch("/api/upload", { method: "POST", body });
+      const data = await res.json();
+      if (res.ok && data.url) {
+        const item: GalleryItem = {
+          id: uid("gal"),
+          title: file.name.replace(/\.[^.]+$/, ""),
+          image: data.url,
+          category: "",
+          featured: false,
+          created_at: new Date().toISOString(),
+        };
+        setCollection("gallery", [item, ...gallery]);
+        toast.success("Image added to gallery");
+      } else {
+        toast.error(data.error ?? "Upload failed");
+      }
+    } catch {
+      toast.error("Upload failed");
+    } finally {
+      setUploading(false);
+      if (inputRef.current) inputRef.current.value = "";
+    }
   };
 
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">
         <p className="text-sm text-muted-foreground">{gallery.length} images</p>
-        <Button size="sm" onClick={() => { setEditing(null); setOpen(true); }}><Plus className="h-4 w-4" /> Add Image</Button>
+        <Button size="sm" onClick={() => inputRef.current?.click()} disabled={uploading}>
+          {uploading ? <Loader2 className="h-4 w-4 animate-spin" /> : <ImagePlus className="h-4 w-4" />}
+          {uploading ? "Uploading…" : "Upload Image"}
+        </Button>
+        <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={(e) => addImage(e.target.files)} />
       </div>
+      {gallery.length === 0 && (
+        <p className="rounded-2xl border border-dashed bg-card p-8 text-center text-sm text-muted-foreground">
+          No images yet. Upload an image to share it in the gallery.
+        </p>
+      )}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {gallery.map((g) => (
           <div key={g.id} className="group relative overflow-hidden rounded-3xl border bg-card">
             <div className="relative aspect-[4/3]">
-              <Image src={g.image} alt={g.title} fill className="object-cover" />
+              <Image src={g.image} alt={g.title || "Gallery image"} fill className="object-cover" />
             </div>
-            <div className="flex items-center justify-between gap-2 p-3">
-              <div className="min-w-0">
-                <p className="line-clamp-1 text-sm font-semibold">{g.title}</p>
-                <p className="text-xs text-muted-foreground">{g.category}</p>
-              </div>
-              <div className="flex shrink-0 gap-1">
-                <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => { setEditing(g); setOpen(true); }}><Pencil className="h-3.5 w-3.5" /></Button>
-                <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive" onClick={() => { setCollection("gallery", gallery.filter((x) => x.id !== g.id)); toast.success("Deleted"); }}><Trash2 className="h-3.5 w-3.5" /></Button>
-              </div>
+            <div className="flex items-center justify-end gap-1 p-3">
+              <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive" onClick={() => { setCollection("gallery", gallery.filter((x) => x.id !== g.id)); toast.success("Image removed"); }}><Trash2 className="h-3.5 w-3.5" /></Button>
             </div>
           </div>
         ))}
       </div>
-      <GalleryDialog open={open} onOpenChange={setOpen} item={editing} onSave={save} />
     </div>
-  );
-}
-
-function GalleryDialog({ open, onOpenChange, item, onSave }: { open: boolean; onOpenChange: (v: boolean) => void; item: GalleryItem | null; onSave: (g: GalleryItem) => void }) {
-  const [f, setF] = React.useState<GalleryItem>({ id: "", title: "", image: "", category: "", featured: false, created_at: "" });
-  React.useEffect(() => {
-    if (open) setF(item ?? { id: "", title: "", image: "", category: "", featured: false, created_at: new Date().toISOString() });
-  }, [open, item]);
-  const set = (k: keyof GalleryItem, v: string | boolean) => setF((p) => ({ ...p, [k]: v }));
-  return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
-        <DialogHeader><DialogTitle>{item ? "Edit Image" : "Add Image"}</DialogTitle></DialogHeader>
-        <div className="grid gap-3 py-2">
-          <Input className={inputCls} value={f.title} onChange={(e) => set("title", e.target.value)} placeholder="Title" />
-          <Input className={inputCls} value={f.category} onChange={(e) => set("category", e.target.value)} placeholder="Category (e.g. False Ceiling)" />
-          <Input className={inputCls} value={f.image} onChange={(e) => set("image", e.target.value)} placeholder="Image URL" />
-        </div>
-        <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)}>Cancel</Button>
-          <Button onClick={() => { if (!f.title.trim() || !f.image.trim()) return toast.error("Title and image are required"); onSave({ ...f, id: f.id || uid("gal") }); }}>Save</Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
   );
 }
 
@@ -213,64 +214,6 @@ function FaqDialog({ open, onOpenChange, item, onSave }: { open: boolean; onOpen
         <DialogFooter>
           <Button variant="outline" onClick={() => onOpenChange(false)}>Cancel</Button>
           <Button onClick={() => { if (!f.question.trim() || !f.answer.trim()) return toast.error("Both fields required"); onSave({ ...f, id: f.id || uid("faq") }); }}>Save</Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  );
-}
-
-/* ---------------- Blog ---------------- */
-
-function BlogManager() {
-  const { blogs, setCollection } = useAdminStore();
-  const [open, setOpen] = React.useState(false);
-  const [editing, setEditing] = React.useState<BlogPost | null>(null);
-
-  const save = (b: BlogPost) => {
-    const exists = blogs.some((x) => x.id === b.id);
-    setCollection("blogs", exists ? blogs.map((x) => (x.id === b.id ? b : x)) : [b, ...blogs]);
-    setOpen(false);
-    setEditing(null);
-    toast.success("Blog post saved");
-  };
-
-  return (
-    <CollectionCard count={blogs.length} onAdd={() => { setEditing(null); setOpen(true); }}>
-      {blogs.map((b) => (
-        <ItemRow key={b.id} title={b.title} subtitle={`${b.category} · ${b.reading_time} min · ${formatDate(b.created_at)}`} body={b.excerpt} onEdit={() => { setEditing(b); setOpen(true); }} onDelete={() => { setCollection("blogs", blogs.filter((x) => x.id !== b.id)); toast.success("Deleted"); }} />
-      ))}
-      <BlogDialog open={open} onOpenChange={setOpen} item={editing} onSave={save} />
-    </CollectionCard>
-  );
-}
-
-function BlogDialog({ open, onOpenChange, item, onSave }: { open: boolean; onOpenChange: (v: boolean) => void; item: BlogPost | null; onSave: (b: BlogPost) => void }) {
-  const [f, setF] = React.useState<BlogPost>({ id: "", slug: "", title: "", excerpt: "", content: "", cover_image: "", category: "", tags: [], author: "", reading_time: 3, is_published: true, views: 0, created_at: "" });
-  const emptyBlog = (): BlogPost => ({ id: "", slug: "", title: "", excerpt: "", content: "", cover_image: "", category: "", tags: [], author: "DIA Enterprises", reading_time: 3, is_published: true, views: 0, created_at: new Date().toISOString() });
-  React.useEffect(() => {
-    if (open) setF(item ?? emptyBlog());
-  }, [open, item]);
-  const [tagsText, setTagsText] = React.useState("");
-  React.useEffect(() => { if (open) setTagsText((item?.tags ?? []).join(", ")); }, [open, item]);
-  const set = (k: keyof BlogPost, v: string | number | boolean) => setF((p) => ({ ...p, [k]: v }));
-  return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[90vh] overflow-y-auto">
-        <DialogHeader><DialogTitle>{item ? "Edit Post" : "New Post"}</DialogTitle></DialogHeader>
-        <div className="grid gap-3 py-2">
-          <Input className={inputCls} value={f.title} onChange={(e) => set("title", e.target.value)} placeholder="Title" />
-          <div className="grid grid-cols-2 gap-3">
-            <Input className={inputCls} value={f.category} onChange={(e) => set("category", e.target.value)} placeholder="Category" />
-            <Input className={inputCls} value={f.author} onChange={(e) => set("author", e.target.value)} placeholder="Author" />
-          </div>
-          <Input className={inputCls} value={f.cover_image} onChange={(e) => set("cover_image", e.target.value)} placeholder="Cover image URL" />
-          <Input className={inputCls} value={tagsText} onChange={(e) => setTagsText(e.target.value)} placeholder="Tags (comma separated)" />
-          <Textarea className={inputCls} rows={2} value={f.excerpt} onChange={(e) => set("excerpt", e.target.value)} placeholder="Excerpt" />
-          <Textarea className={inputCls} rows={6} value={f.content} onChange={(e) => set("content", e.target.value)} placeholder="Full content" />
-        </div>
-        <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)}>Cancel</Button>
-          <Button onClick={() => { if (!f.title.trim() || !f.content.trim()) return toast.error("Title and content are required"); onSave({ ...f, tags: tagsText.split(",").map((t) => t.trim()).filter(Boolean), slug: f.slug || f.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""), id: f.id || uid("post") }); }}>Save</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
