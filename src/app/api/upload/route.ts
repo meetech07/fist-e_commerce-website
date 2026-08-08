@@ -14,7 +14,9 @@ export async function POST(request: NextRequest) {
     if (file.size > MAX_BYTES) return NextResponse.json({ error: "Image too large (max 8MB)" }, { status: 400 });
 
     if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
-      return NextResponse.json({ error: "Storage not configured" }, { status: 503 });
+      const buf = Buffer.from(await file.arrayBuffer());
+      const url = `data:${file.type};base64,${buf.toString("base64")}`;
+      return NextResponse.json({ url, path: "" });
     }
 
     const supabase = (await import("@/lib/supabase/admin")).createAdminClient();

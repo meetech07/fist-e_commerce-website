@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { ImagePlus, Loader2, Pencil, Plus, Trash2 } from "lucide-react";
+import { Download, ImagePlus, Loader2, Pencil, Plus, Trash2 } from "lucide-react";
 import { useAdminStore } from "@/lib/admin-store";
 import type { Faq, GalleryItem, Testimonial } from "@/types";
 import { uid } from "@/lib/utils";
@@ -141,6 +141,25 @@ function ImageManager() {
     }
   };
 
+  const downloadImage = async (g: GalleryItem) => {
+    try {
+      const res = await fetch(g.image);
+      const blob = await res.blob();
+      const ext = (g.image.split(".").pop() || "jpg").split("?")[0].slice(0, 5);
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${g.title || "image"}.${ext}`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      toast.success("Image downloaded");
+    } catch {
+      toast.error("Download failed");
+    }
+  };
+
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">
@@ -163,6 +182,7 @@ function ImageManager() {
               <Image src={g.image} alt={g.title || "Gallery image"} fill className="object-cover" />
             </div>
             <div className="flex items-center justify-end gap-1 p-3">
+              <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => downloadImage(g)} title="Download image"><Download className="h-3.5 w-3.5" /></Button>
               <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive" onClick={() => { setCollection("gallery", gallery.filter((x) => x.id !== g.id)); toast.success("Image removed"); }}><Trash2 className="h-3.5 w-3.5" /></Button>
             </div>
           </div>
