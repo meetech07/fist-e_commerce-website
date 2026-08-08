@@ -3,12 +3,12 @@
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { createClient } from "@supabase/supabase-js";
 import { Loader2, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/layout/Logo";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
+import { createClient } from "@/lib/supabase/client";
 
 export default function OtpPage({
   searchParams,
@@ -40,10 +40,7 @@ export default function OtpPage({
     setLoading(true);
     const configured = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL);
     if (configured) {
-      const supabase = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      );
+      const supabase = createClient();
       const { error } = await supabase.auth.verifyOtp({
         phone: `+91${phone}`,
         token: code,

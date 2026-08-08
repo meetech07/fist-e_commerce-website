@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getLocalUser, localSignOut } from "@/lib/auth-local";
-import { createClient } from "@supabase/supabase-js";
+import { createClient } from "@/lib/supabase/client";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 
@@ -39,10 +39,7 @@ export function AccountShell({ children }: { children: React.ReactNode }) {
   React.useEffect(() => {
     const configured = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL);
     if (configured) {
-      const supabase = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      );
+      const supabase = createClient();
       supabase.auth.getUser().then(({ data }) => {
         if (data.user) {
           setUser({
@@ -61,10 +58,7 @@ export function AccountShell({ children }: { children: React.ReactNode }) {
 
   const signOut = async () => {
     if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
-      const supabase = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      );
+      const supabase = createClient();
       await supabase.auth.signOut();
     } else {
       localSignOut();

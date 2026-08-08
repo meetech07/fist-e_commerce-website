@@ -4,7 +4,6 @@ import * as React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { createClient } from "@supabase/supabase-js";
 import { KeyRound, Mail, Phone, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,6 +13,7 @@ import { Logo } from "@/components/layout/Logo";
 import { isValidEmail, isValidPhone } from "@/lib/utils";
 import { toast } from "sonner";
 import { isSupabaseConfigured, localSignIn, localSignUp, otpLogin } from "@/lib/auth-local";
+import { createClient } from "@/lib/supabase/client";
 
 function GoogleIcon({ className }: { className?: string }) {
   return (
@@ -26,15 +26,9 @@ function GoogleIcon({ className }: { className?: string }) {
   );
 }
 
-let supabaseClient: ReturnType<typeof createClient> | null = null;
 function getSupabase() {
-  if (!supabaseClient && isSupabaseConfigured()) {
-    supabaseClient = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    );
-  }
-  return supabaseClient;
+  if (!isSupabaseConfigured()) return null;
+  return createClient();
 }
 
 export function AuthFlow({ mode = "login" }: { mode?: "login" | "signup" }) {
@@ -67,7 +61,15 @@ export function AuthFlow({ mode = "login" }: { mode?: "login" | "signup" }) {
       if (configured && supabase) {
         const { data, error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw new Error(error.message);
-        const role = (data.user?.user_metadata?.role as string | undefined) ?? "customer";
+        let role = (data.user?.user_metadata?.role as string | undefined) ?? "customer";
+        if (data.user) {
+          const { data: profile } = await supabase
+            .from("profiles")
+            .select("role")
+            .eq("id", data.user.id)
+            .single();
+          if (profile?.role) role = profile.role as string;
+        }
         afterLogin(role);
       } else {
         const result = localSignIn(email, password);

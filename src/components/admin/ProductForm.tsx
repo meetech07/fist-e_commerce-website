@@ -43,7 +43,7 @@ const EMPTY: Product = {
   is_featured: false,
   is_best_seller: false,
   is_new_arrival: false,
-  is_published: false,
+  is_published: true,
   views: 0,
   sold: 0,
   created_at: new Date().toISOString(),

@@ -79,3 +79,18 @@ values (
   now(),
   now()
 ) on conflict (email) do nothing;
+
+-- Promote the demo admin to role 'admin' (required for staff API + RLS)
+update public.profiles
+set role = 'admin'
+where email = 'admin@diaenterprises.in'
+  and (role is null or role <> 'admin');
+
+-- Also record the role in auth metadata so client-side redirects recognise staff
+update auth.users
+set raw_user_meta_data = jsonb_set(
+  coalesce(raw_user_meta_data, '{}'::jsonb),
+  '{role}',
+  '"admin"'::jsonb
+)
+where email = 'admin@diaenterprises.in';

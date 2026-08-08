@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { createClient } from "@supabase/supabase-js";
+import { createClient } from "@/lib/supabase/client";
 import type { Order } from "@/types";
 import { getLocalOrders } from "@/lib/orders-local";
 
@@ -12,10 +12,7 @@ export function useOrders() {
   React.useEffect(() => {
     const configured = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL);
     if (configured) {
-      const supabase = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      );
+      const supabase = createClient();
       supabase.auth.getUser().then(({ data }) => {
         if (!data.user) {
           setOrders(getLocalOrders());

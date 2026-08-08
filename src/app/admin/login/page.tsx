@@ -3,7 +3,6 @@
 import * as React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { createClient } from "@supabase/supabase-js";
 import { KeyRound, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,17 +11,7 @@ import { Logo } from "@/components/layout/Logo";
 import { isValidEmail } from "@/lib/utils";
 import { toast } from "sonner";
 import { isSupabaseConfigured, localSignIn, localSignOut } from "@/lib/auth-local";
-
-let supabaseClient: ReturnType<typeof createClient> | null = null;
-function getSupabase() {
-  if (!supabaseClient && isSupabaseConfigured()) {
-    supabaseClient = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    );
-  }
-  return supabaseClient;
-}
+import { createClient } from "@/lib/supabase/client";
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -30,7 +19,7 @@ export default function AdminLoginPage() {
   const [password, setPassword] = React.useState("");
   const [loading, setLoading] = React.useState(false);
 
-  const configured = Boolean(getSupabase());
+  const configured = Boolean(isSupabaseConfigured());
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,12 +27,21 @@ export default function AdminLoginPage() {
     if (password.length < 6) return toast.error("Password must be at least 6 characters");
     setLoading(true);
     try {
-      if (configured && supabaseClient) {
-        const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+      if (configured) {
+        const supabase = createClient();
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw new Error(error.message);
-        const role = (data.user?.user_metadata?.role as string | undefined) ?? "customer";
+        let role = (data.user?.user_metadata?.role as string | undefined) ?? "customer";
+        if (data.user) {
+          const { data: profile } = await supabase
+            .from("profiles")
+            .select("role")
+            .eq("id", data.user.id)
+            .single();
+          if (profile?.role) role = profile.role as string;
+        }
         if (role !== "admin" && role !== "manager" && role !== "staff") {
-          await supabaseClient.auth.signOut();
+          await supabase.auth.signOut();
           throw new Error("This account does not have staff access.");
         }
         toast.success("Welcome to the Admin Panel");

@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getLocalUser, localSignOut } from "@/lib/auth-local";
-import { createClient } from "@supabase/supabase-js";
+import { createClient } from "@/lib/supabase/client";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { AdminStoreProvider } from "@/lib/admin-store";
 
@@ -46,9 +46,18 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
       setLoaded(true);
       return;
     }
-    const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
-    supabase.auth.getUser().then(({ data }) => {
-      setSupabaseRole((data.user?.user_metadata?.role as string) ?? null);
+    const supabase = createClient();
+    supabase.auth.getUser().then(async ({ data }) => {
+      let role = (data.user?.user_metadata?.role as string) ?? null;
+      if (data.user) {
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("role")
+          .eq("id", data.user.id)
+          .single();
+        if (profile?.role) role = profile.role as string;
+      }
+      setSupabaseRole(role);
       setLoaded(true);
     });
   }, [configured]);
@@ -72,7 +81,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
 
   const signOut = async () => {
     if (configured) {
-      const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
+      const supabase = createClient();
       await supabase.auth.signOut();
     } else {
       localSignOut();
